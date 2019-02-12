@@ -27,19 +27,19 @@ class UserController extends AbstractController{
 
     public  function  index()
     {
-        //$users =['User 1', 'User 2'];
 
         //extract data from db
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        //$users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        //return $this->render('users/index.html.twig', array('users'=>$users));
 
-        return $this->render('users/index.html.twig', array('users'=>$users));
-
+        return $this->render('users/show.html.twig');
     }
 
     /**
      * @Route("/user/{id}", name="user_show")
      */
 
+    //shows user description
     public  function show($id)
     {
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);

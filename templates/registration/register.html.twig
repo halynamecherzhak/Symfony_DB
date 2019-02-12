@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Registration Form</h1>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+        {{ message }}
+            <a href="/"></a>
+        </div>
+    {%  endfor %}
+
+{{ form_start(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+
+<button type="submit">Register!</button>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{#{% include '/web/html/register.html' %}#}
