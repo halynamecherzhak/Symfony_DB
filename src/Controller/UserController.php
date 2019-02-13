@@ -9,7 +9,7 @@ namespace  App\Controller;
 
 use App\Entity\User;
 
-
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\Annotation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,21 +18,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-class UserController extends AbstractController{
+class UserController extends AbstractController
+{
 
     /**
-     * @Route("/",name="user_list")
-     * @Method({"GET"})
+     * @Route("/",name="app_homepage")
      */
 
     public  function  index()
     {
 
         //extract data from db
-        //$users = $this->getDoctrine()->getRepository(User::class)->findAll();
-        //return $this->render('users/index.html.twig', array('users'=>$users));
-
-        return $this->render('users/show.html.twig');
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        return $this->render('users/index.html.twig', array('users'=>$users));
     }
 
     /**

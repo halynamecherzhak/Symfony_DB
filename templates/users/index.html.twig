@@ -1,28 +1,29 @@
 {%  extends 'base.html.twig' %}
 {% block title  %}Symfony Users{% endblock %}
 
-{#{% block body %}#}
-    {#{% if users %}#}
-        {#<table id="users" class="table table-striped">#}
-            {#<thead>#}
-            {#<tr>#}
-                {#<th>User Name</th>#}
-                {#<th>Description</th>#}
-            {#</tr>#}
-            {#</thead>#}
-            {#<tbody>#}
-            {#{% for user in users %}#}
-                {#<tr>#}
-                    {#<td>{{ user.name}}</td>#}
+{% block body %}
+    {% if users %}
+        <table id="users" class="table table-striped">
+            <thead>
+            <tr>
+                <th>User Name</th>
+                <th>User Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username}}</td>
+                    <td>{{ user.email}}</td>
                     {#<td>#}
                         {#<a href="/user/{{ user.id }}" class="btn btn-dark">Show</a>#}
                     {#</td>#}
-                {#</tr>#}
-            {#{% endfor %}#}
-            {#</tbody>#}
-        {#</table>#}
-    {#{% else %}#}
-        {#<p>No users to display</p>#}
-    {#{% endif %}#}
-{#{% endblock %}#}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No users to display</p>
+    {% endif %}
+{% endblock %}
 
