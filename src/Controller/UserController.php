@@ -12,9 +12,9 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\Annotation;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -22,7 +22,7 @@ class UserController extends AbstractController
 {
 
     /**
-     * @Route("/",name="app_homepage")
+     * @Route("/users",name="app_homepage")
      */
 
     public  function  index()

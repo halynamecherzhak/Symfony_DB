@@ -27,3 +27,51 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+
+
+
+#doctrine:
+#    dbal:
+#        default_connection: default
+#        connections:
+#            default:
+#                # configure these for your database server
+#                driver: 'pdo_mysql'
+#                server_version: '5.7'
+#                charset: utf8mb4
+#                default_table_options:
+#                    charset: utf8mb4
+#                    collate: utf8mb4_unicode_ci
+#
+#                url: '%env(resolve:DATABASE_URL)%'
+#            article:
+#                # configure these for your database server
+#                url: '%env(resolve:DATABASE_ARTICLE_URL)%'
+#                driver: 'pdo_mysql'
+#                server_version: '5.7'
+#                charset: utf8mb4
+#                default_table_options:
+#                    charset: utf8mb4
+#                    collate: utf8mb4_unicode_ci
+#
+#    orm:
+#        default_entity_manager: default
+#        entity_managers:
+#            default:
+#                connection: default
+#                mappings:
+#                    User:
+#                        is_bundle: false
+#                        type: annotation
+#                        dir: '%kernel.project_dir%/src/Entity/User'
+#                        prefix: 'App\Entity\User'
+#                        alias: User
+#            customer:
+#                connection: article
+#                mappings:
+#                    Article:
+#                        is_bundle: false
+#                        type: annotation
+#                        dir: '%kernel.project_dir%/src/Entity/Article'
+#                        prefix: 'App\Entity\Article'
+#                        alias: Article
