@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -72,6 +74,21 @@ class ArticleController extends Controller {
     }
 
     /**
+     * @Route("/article/sort" , name="sort_article")
+     *  Method({"GET", "POST"})
+     */
+
+    public  function  sort(ArticleRepository $repository){
+
+        $articles = $repository->sortArticleByTitle();
+
+        return $this->render('articles/index.html.twig', [
+            'articles' => $articles,
+        ]);
+
+    }
+
+    /**
      * @Route("/article/{id}", name="article_show")
      */
 
@@ -119,13 +136,7 @@ class ArticleController extends Controller {
         ));
     }
 
-    /**
-     * @Route("article/sort" , name="sort_article")
-     */
 
-    public  function  sort(){
-
-    }
 
 
 }
