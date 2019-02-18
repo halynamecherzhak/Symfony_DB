@@ -1,8 +1,20 @@
+{#{% extends 'inc/articleNavBar.html.twig' %}#}
 {% extends 'base.html.twig' %}
-
 {% block title %}SymphArt Articles{% endblock %}
 
 {% block body %}
+
+    <nav class=" navbar-expand-sm navbar-dark bg-primary">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="/article/new" class="nav-link">New Article</a>
+            </li>
+            <li class="nav-item">
+                <a href="/article/sort" class="nav-link">Sort Article by Title</a>
+            </li>
+        </ul>
+    </nav>
+
     {% if articles %}
         <table id="articles" class="table table-striped">
             <thead>
@@ -18,7 +30,7 @@
                     <td>
                         <a href="/article/{{ article.id }}" class="btn btn-dark">Show</a>
                         <a href="/article/edit/{{ article.id }}" class="btn btn-light">Edit</a>
-                        <a href="#" class="btn btn-danger delete-article" data-id="{{ article.id }}">Delete</a>
+                        <a href="/article/delete/{{article.id}}" class="btn btn-danger delete-article" >Delete</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -28,7 +40,6 @@
         <p>No articles to display</p>
     {% endif %}
 {% endblock %}
-
-{% block javascripts %}
-    <script src="/js/main.js"></script>
-{% endblock %}
+{#{% block javascripts %}#}
+    {#<script src="/js/main.js"></script>#}
+{#{% endblock %}#}
