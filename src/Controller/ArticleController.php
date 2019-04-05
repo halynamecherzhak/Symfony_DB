@@ -82,7 +82,7 @@ class ArticleController extends Controller {
 
         $articles = $repository->sortArticleByTitle();
 
-        return $this->render('articles/index.html.twig', [
+        return $this->render('articles/sorted_articles.html.twig', [
             'articles' => $articles,
         ]);
 
