@@ -30,7 +30,7 @@ class User implements UserInterface
      * @Assert\NotBlank()
      * @Assert\Email()
      */
-    private  $email;
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -55,7 +55,7 @@ class User implements UserInterface
 
     public function setUserName($username)
     {
-         $this->username=$username;
+        $this->username = $username;
     }
 
     public function getEmail()
@@ -65,7 +65,7 @@ class User implements UserInterface
 
     public function setEmail($email)
     {
-         $this->email=$email;
+        $this->email = $email;
     }
 
     public function getPassword()
@@ -75,7 +75,7 @@ class User implements UserInterface
 
     public function setPassword($password)
     {
-         $this->password=$password;
+        $this->password = $password;
     }
 
     public function getPlainPassword()
@@ -85,7 +85,7 @@ class User implements UserInterface
 
     public function setPlainPassword($plainPassword)
     {
-         $this->plainPassword=$plainPassword;
+        $this->plainPassword = $plainPassword;
     }
 
     /**

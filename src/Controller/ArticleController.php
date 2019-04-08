@@ -14,15 +14,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ArticleController extends Controller {
+class ArticleController extends Controller
+{
 
     /**
      * @Route("/articles", name="article_list")
      * @Method({"GET"})
      */
 
-    public function index() {
-        $articles= $this->getDoctrine()->getRepository(Article::class)->findAll();
+    public function index()
+    {
+        $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
         return $this->render('articles/index.html.twig', array('articles' => $articles));
     }
 
@@ -30,7 +32,7 @@ class ArticleController extends Controller {
      * @Route("/article/delete/{id}", name="article_delete")
      */
 
-    public  function delete($id)
+    public function delete($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -47,7 +49,8 @@ class ArticleController extends Controller {
      * Method({"GET", "POST"})
      */
 
-    public function new(Request $request) {
+    public function newArticle(Request $request)
+    {
         $article = new Article();
         $form = $this->createFormBuilder($article)
             ->add('title', TextType::class, array('attr' => array('class' => 'form-control')))
@@ -61,7 +64,7 @@ class ArticleController extends Controller {
             ))
             ->getForm();
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $article = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
@@ -77,15 +80,14 @@ class ArticleController extends Controller {
      * @Route("/article/sort" , name="sort_article")
      *  Method({"GET", "POST"})
      */
-
-    public  function  sort(ArticleRepository $repository){
+    public function sort(ArticleRepository $repository)
+    {
 
         $articles = $repository->sortArticleByTitle();
 
         return $this->render('articles/sorted_articles.html.twig', [
             'articles' => $articles,
         ]);
-
     }
 
     /**
@@ -93,7 +95,7 @@ class ArticleController extends Controller {
      */
 
     //shows user description
-    public  function show($id)
+    public function show($id)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
         return $this->render('articles/show.html.twig', array('article' => $article));
@@ -101,10 +103,11 @@ class ArticleController extends Controller {
 
     /**
      * @Route("/article/edit/{id}", name="edit_article")
-     * Method({"GET", "POST"})
+     * Method({"GET"})
      */
 
-    public function edit(Request $request, $id) {
+    public function edit(Request $request, $id)
+    {
 
         $article = new Article();
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
@@ -123,8 +126,7 @@ class ArticleController extends Controller {
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
@@ -136,7 +138,38 @@ class ArticleController extends Controller {
         ));
     }
 
+    public static function callback($a1, $b1)
+    {
+        if (is_array($a1))
+            $a = $a1['title'];
 
+        if (is_array($b1))
+            $b = $b1['title'];
 
+        $el1 = strtolower($a);
+        $el2 = strtolower($b);
+
+        if ($el1 > $el2)
+            return 1;
+        if ($el1 < $el2)
+            return -1;
+        return 0;
+    }
+
+    /**
+     * @Route("/sorting" , name="sort")
+     *  Method({"GET"})
+     */
+    public function sortingByTitle(ArticleRepository $repository)
+    {
+        $article = $repository->selectTitles();
+
+        usort($article, array('App\Controller\ArticleController', 'callback'));
+
+        return $this->render('articles/example.html.twig', [
+            'articles' => $article,
+        ]);
+
+    }
 
 }

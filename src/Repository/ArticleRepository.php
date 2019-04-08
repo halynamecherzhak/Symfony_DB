@@ -29,8 +29,15 @@ class ArticleRepository extends ServiceEntityRepository
             ->andWhere('a.title IS NOT NULL')
             ->orderBy('a.title', 'ASC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
+    }
+
+    public function selectTitles()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a.title')
+            ->getQuery()
+            ->getResult();
     }
 
 }

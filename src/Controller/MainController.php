@@ -12,14 +12,16 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class MainController extends Controller {
+class MainController extends Controller
+{
 
     /**
      * @Route("/", name="home_page")
      * @Method({"GET"})
      */
 
-    public function index() {
+    public function index()
+    {
 
         return $this->render('/inc/mainNavBar.html.twig');
     }

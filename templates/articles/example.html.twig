@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <a href="/articles">Go Back</a>
+
+    {% if articles %}
+        <table id="articles" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Article Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.title }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No articles to display</p>
+    {% endif %}
+
+{% endblock %}

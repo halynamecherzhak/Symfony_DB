@@ -5,7 +5,8 @@
  * Date: 2/6/2019
  * Time: 2:23 PM
  */
-namespace  App\Controller;
+
+namespace App\Controller;
 
 use App\Entity\User;
 
@@ -25,12 +26,12 @@ class UserController extends AbstractController
      * @Route("/users",name="app_homepage")
      */
 
-    public  function  index()
+    public function index()
     {
 
         //extract data from db
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render('users/index.html.twig', array('users'=>$users));
+        return $this->render('users/index.html.twig', array('users' => $users));
     }
 
     /**
@@ -38,7 +39,7 @@ class UserController extends AbstractController
      */
 
     //shows user description
-    public  function show($id)
+    public function show($id)
     {
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
         return $this->render('users/show.html.twig', array('user' => $user));

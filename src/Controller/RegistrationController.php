@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Form\UserType;
@@ -33,8 +34,7 @@ class RegistrationController extends Controller
                 ->encodePassword(
                     $user,
                     $user->getPlainPassword()
-                )
-            ;
+                );
             $user->setPassword($password);
 
 
@@ -42,7 +42,7 @@ class RegistrationController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success','You are now successfully register!');
+            $this->addFlash('success', 'You are now successfully register!');
             //return $this->redirectToRoute('/home');
 
         }
