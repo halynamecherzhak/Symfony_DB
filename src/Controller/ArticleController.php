@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
-use Symfony\Component\HttpFoundation\Response;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\Sorting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -137,34 +136,17 @@ class ArticleController extends Controller
             'form' => $form->createView()
         ));
     }
-
-    public static function callback($a1, $b1)
-    {
-        if (is_array($a1))
-            $a = $a1['title'];
-
-        if (is_array($b1))
-            $b = $b1['title'];
-
-        $el1 = strtolower($a);
-        $el2 = strtolower($b);
-
-        if ($el1 > $el2)
-            return 1;
-        if ($el1 < $el2)
-            return -1;
-        return 0;
-    }
-
     /**
      * @Route("/sorting" , name="sort")
      *  Method({"GET"})
      */
-    public function sortingByTitle(ArticleRepository $repository)
+    public function sortingByTitle(Sorting $sorting)
     {
-        $article = $repository->selectTitles();
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->selectTitles();
 
-        usort($article, array('App\Controller\ArticleController', 'callback'));
+        usort($article, array($sorting, 'callback'));
 
         return $this->render('articles/example.html.twig', [
             'articles' => $article,

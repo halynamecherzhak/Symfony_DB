@@ -68,6 +68,7 @@
         }
     },
     "require-dev": {
+        "symfony/phpunit-bridge": "4.2.*",
         "symfony/var-dumper": "4.2.*",
         "symfony/web-server-bundle": "4.2.*"
     }
