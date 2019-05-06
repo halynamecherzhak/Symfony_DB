@@ -26,9 +26,9 @@ class Sorting
         return $el1 <=> $el2;
     }
 
-    public function add($a, $b)
-    {
-        return $a + $b;
-    }
+//    public function add($a, $b)
+//    {
+//        return $a + $b;
+//    }
 
 }

@@ -40,4 +40,12 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public  function  countArt()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('count(a.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

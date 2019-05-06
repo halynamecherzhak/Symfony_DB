@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Service\Sorting;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -12,9 +13,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Response;
 
-class ArticleController extends Controller
+use Doctrine\Common\Persistence\ObjectManager;
+
+
+class ArticleController extends AbstractController
 {
+    private $objectManager;
+
+    public function __construct(ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
+
+    /**
+     * @Route("/")
+     * @Method({"GET"})
+     */
+    public function countArticles()
+    {
+        $count = 0;
+
+        $articlesRepository = $this->objectManager
+            ->getRepository(Article::class);
+        $articles = $articlesRepository->findAll();
+
+        if (is_array($articles)) {
+            $content_count = count($articles);
+        } else {
+            $content_count = 0;
+        }
+
+        for ($article = 0; $article < $content_count; $article++) {
+            $count++;
+        }
+
+        return $articles->$count;
+    }
 
     /**
      * @Route("/articles", name="article_list")
